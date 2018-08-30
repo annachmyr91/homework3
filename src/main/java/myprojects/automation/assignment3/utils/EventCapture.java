@@ -1,4 +1,4 @@
-package myprojects.automation.assignment3.tests;
+package myprojects.automation.assignment3.utils;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;

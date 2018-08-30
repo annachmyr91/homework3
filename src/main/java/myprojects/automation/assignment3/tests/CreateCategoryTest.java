@@ -2,6 +2,7 @@ package myprojects.automation.assignment3.tests;
 
 import myprojects.automation.assignment3.BaseScript;
 import myprojects.automation.assignment3.GeneralActions;
+import myprojects.automation.assignment3.utils.EventCapture;
 import myprojects.automation.assignment3.utils.Properties;
 import org.openqa.selenium.support.events.EventFiringWebDriver;
 
