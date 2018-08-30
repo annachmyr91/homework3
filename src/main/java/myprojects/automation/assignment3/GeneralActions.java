@@ -5,7 +5,6 @@ import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
-import org.openqa.selenium.support.events.EventFiringWebDriver;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.util.NoSuchElementException;
@@ -49,7 +48,9 @@ public class GeneralActions {
         // TODO implement logic for new category creation
         Actions actions = new Actions(driver);
         driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
-        actions.moveToElement(driver.findElement(By.id("subtab-AdminCatalog"))).click(driver.findElement(By.cssSelector("#subtab-AdminCategories a"))).build().perform();
+        Actions act = actions.moveToElement(driver.findElement(By.id("subtab-AdminCatalog")));
+        driver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
+        act.click(driver.findElement(By.cssSelector("#subtab-AdminCategories a"))).build().perform();
         waitForContentLoad();
 
         String[] categoryNames = {"Glasses_1", "Glasses_2", "Glasses_3", "Glasses_4", "Glasses_5"};
