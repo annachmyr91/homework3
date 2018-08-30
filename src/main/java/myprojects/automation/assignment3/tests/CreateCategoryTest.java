@@ -7,7 +7,7 @@ import myprojects.automation.assignment3.utils.Properties;
 import org.openqa.selenium.support.events.EventFiringWebDriver;
 
 public class CreateCategoryTest extends BaseScript {
-    public static void main(String[] args) throws InterruptedException {
+    public static void main(String[] args) {
         // TODO predriver.getpare driver object
         EventFiringWebDriver edriver = getConfiguredDriver();
 
@@ -28,11 +28,3 @@ public class CreateCategoryTest extends BaseScript {
 
 }
 
-
-// login
-
-// create category
-
-// check that new category appears in Categories table
-
-// finish script

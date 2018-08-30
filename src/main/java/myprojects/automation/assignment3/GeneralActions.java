@@ -45,7 +45,6 @@ public class GeneralActions {
      * //* @param categoryName
      */
     public void createCategory() {
-        // public void createCategory(String categoryName) {
 
         // TODO implement logic for new category creation
         Actions actions = new Actions(driver);
@@ -66,7 +65,6 @@ public class GeneralActions {
                 i++;
             }
         }
-        //System.out.println("I equals to " + i);
 
         driver.findElement(By.id("page-header-desc-category-new_category")).click();
         waitForContentLoad();
@@ -98,7 +96,6 @@ public class GeneralActions {
                 j++;
             }
         }
-        //System.out.println("J equals to " + j);
 
         if (j == (i + 1))
             System.out.println("Category added successfully");
