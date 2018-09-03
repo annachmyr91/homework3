@@ -23,7 +23,7 @@ public class CreateCategoryTest extends BaseScript {
         generalActions.login(" webinar.test@gmail.com", "Xcg7299bnSmMuRLp9ITw");
         generalActions.waitForContentLoad();
         generalActions.createCategory();
-        edriver.close();
+        //edriver.close();
     }
 
 }

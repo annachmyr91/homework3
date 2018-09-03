@@ -43,29 +43,58 @@ public class GeneralActions {
      * <p>
      * //* @param categoryName
      */
+
+    public String generateString(int length) {
+        final String ALPHABET = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
+
+        Random random = new Random();
+        StringBuilder builder = new StringBuilder(length);
+
+        for (int i = 0; i < length; i++) {
+            builder.append(ALPHABET.charAt(random.nextInt(ALPHABET.length())));
+        }
+
+        return builder.toString();
+    }
+
     public void createCategory() {
 
         // TODO implement logic for new category creation
         Actions actions = new Actions(driver);
         driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
+        waitForContentLoad();
         Actions act = actions.moveToElement(driver.findElement(By.id("subtab-AdminCatalog")));
-        driver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
+        waitForContentLoad();
+        //   driver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
         act.click(driver.findElement(By.cssSelector("#subtab-AdminCategories a"))).build().perform();
         waitForContentLoad();
 
-        String[] categoryNames = {"Glasses_1", "Glasses_2", "Glasses_3", "Glasses_4", "Glasses_5"};
+
+/*        String[] categoryNames = {"Glasses_1", "Glasses_2", "Glasses_3", "Glasses_4", "Glasses_5"};
         Random random = new Random();
         int randomNumber = random.nextInt(categoryNames.length);
-        String randomName = categoryNames[randomNumber];
+        String randomName = categoryNames[randomNumber];*/
+
+        String randomName = null;
+        try {
+            randomName = generateString(Random.class.newInstance().nextInt(9));
+        } catch (InstantiationException e) {
+            e.printStackTrace();
+        } catch (IllegalAccessException e) {
+            e.printStackTrace();
+        }
+
 
         int i = 0;
-        for (WebElement webElement : driver.findElements(By.xpath("//table[@id=\"table-category\"]//tbody/tr//td[3]"))) {
+        for (WebElement webElement : driver.findElements(By.xpath("//td[3]"))) {
             String categoryName = webElement.getText();
 
             if (categoryName.equals(randomName)) {
                 i++;
             }
         }
+
+        waitForContentLoad();
 
         driver.findElement(By.id("page-header-desc-category-new_category")).click();
         waitForContentLoad();
@@ -84,12 +113,13 @@ public class GeneralActions {
         } catch (NoSuchElementException e) {
             System.out.println("Alert about successful category creation does not appear");
         }
+        waitForContentLoad();
 
-        driver.findElement(By.xpath("//table[@id=\"table-category\"]//thead/tr[1]/th[3]//a[1]")).click();
+        driver.findElement(By.xpath("//th[3]//a[2]")).click();
         waitForContentLoad();
 
         int j = 0;
-        for (WebElement webElement : driver.findElements(By.xpath("//table[@id=\"table-category\"]//tbody/tr//td[3]"))) {
+        for (WebElement webElement : driver.findElements(By.xpath("//td[3]"))) {
             String categoryName = webElement.getText();
 
 
@@ -102,6 +132,7 @@ public class GeneralActions {
             System.out.println("Category added successfully");
         else System.out.println("New category hasn't added");
     }
+
 
     /**
      * Waits until page loader disappears from the page
