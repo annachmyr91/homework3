@@ -5,6 +5,7 @@ import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
+import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.util.NoSuchElementException;
@@ -64,20 +65,16 @@ public class GeneralActions {
         driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
         waitForContentLoad();
         Actions act = actions.moveToElement(driver.findElement(By.id("subtab-AdminCatalog")));
-        waitForContentLoad();
-        //   driver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
+        driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
+
+        //wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector("#subtab-AdminCategories a")));
         act.click(driver.findElement(By.cssSelector("#subtab-AdminCategories a"))).build().perform();
         waitForContentLoad();
 
 
-/*        String[] categoryNames = {"Glasses_1", "Glasses_2", "Glasses_3", "Glasses_4", "Glasses_5"};
-        Random random = new Random();
-        int randomNumber = random.nextInt(categoryNames.length);
-        String randomName = categoryNames[randomNumber];*/
-
         String randomName = null;
         try {
-            randomName = generateString(Random.class.newInstance().nextInt(9));
+            randomName = generateString(Random.class.newInstance().nextInt(3) + 5);
         } catch (InstantiationException e) {
             e.printStackTrace();
         } catch (IllegalAccessException e) {
@@ -110,6 +107,8 @@ public class GeneralActions {
 
         try {
             driver.findElement(By.xpath("//*[@class=\"alert alert-success\"]")).isDisplayed();
+            System.out.println("Alert about successful category creation appears");
+
         } catch (NoSuchElementException e) {
             System.out.println("Alert about successful category creation does not appear");
         }
@@ -139,7 +138,7 @@ public class GeneralActions {
      */
     public void waitForContentLoad() {
         // TODO implement generic method to wait until page content is loaded
-        driver.manage().timeouts().pageLoadTimeout(10, TimeUnit.SECONDS);
+        driver.manage().timeouts().pageLoadTimeout(20, TimeUnit.SECONDS);
 
     }
 }
